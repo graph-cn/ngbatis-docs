@@ -37,7 +37,7 @@ function switchLang() {
 async function getMenu() {
   const res = await axios({
     method: 'get',
-    url: `${process.env.BASE_URL}docs/${lang}/nav.json`
+    url: `./docs/${lang}/nav.json`
   })
 
   menus.value = await res.data
@@ -81,7 +81,7 @@ function findMenu(menus, ids) {
 
 function toPage(menu: any, trace: Array<any>) {
   sessionStorage.setItem('menuIndex', JSON.stringify(trace))
-  router.push({ path: `${process.env.BASE_URL}`, query: {path: trace[0].id, file: menu.id}});
+  router.push({ path: `/`, query: {path: trace[0].id, file: menu.id}});
 }
 
 getMenu()

@@ -19,7 +19,7 @@ defineComponent({
 async function getMdText(path: String, file: String) {
   const res = await axios({
     method: 'get',
-    url: `${process.env.BASE_URL}docs/${lang}/md/${path}/${file}.md`
+    url: `./docs/${lang}/md/${path}/${file}.md`
   })
   mdContent.value = await res.data
   mdShow.value = true
