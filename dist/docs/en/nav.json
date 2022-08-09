@@ -1,0 +1,38 @@
+[
+  {
+    "id": "quick-start",
+    "text": "Quick Start",
+    "children": [
+      {
+        "id": "about",
+        "text": "About Ngbatis"
+      },
+      {
+        "id": "features",
+        "text": "Features"
+      },
+      {
+        "id": "install",
+        "text": "Import and Config"
+      }
+    ]
+  },
+  {
+    "id": "dev-example",
+    "text": "How to use",
+    "children": [
+      {
+        "id": "prepare",
+        "text": "Prepare Work"
+      },
+      {
+        "id": "dao-basic",
+        "text": "By Basic DAO"
+      },
+      {
+        "id": "custom-crud",
+        "text": "By Custom nGQL"
+      }
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "quick-start",
+    "text": "快速开始",
+    "children": [
+      {
+        "id": "about",
+        "text": "关于Ngbatis"
+      },
+      {
+        "id": "features",
+        "text": "框架特性"
+      },
+      {
+        "id": "install",
+        "text": "引入项目与配置"
+      }
+    ]
+  },
+  {
+    "id": "dev-example",
+    "text": "使用样例",
+    "children": [
+      {
+        "id": "prepare",
+        "text": "开始之前"
+      },
+      {
+        "id": "dao-basic",
+        "text": "使用基类读写"
+      },
+      {
+        "id": "custom-crud",
+        "text": "自定义nGQL"
+      }
+    ]
+  }
+]
