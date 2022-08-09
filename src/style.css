@@ -75,7 +75,7 @@ html.dark .v-md-pre-wrapper {
   background-color: var(--el-menu-text-color) !important;
 }
 
-html.dark img[src="/light.png"] {
+html.dark img[alt="LOGO"] {
   filter: invert(1) hue-rotate(180deg);
 }
 
