@@ -6,8 +6,8 @@ import axios from "axios"
 
 let route = useRoute()
 
-console.info(route.params.file)
-console.info(route.params.path)
+console.info(route.query.file)
+console.info(route.query.path)
 
 let mdContent = ref(undefined as string)
 let mdShow = ref(false)
@@ -25,7 +25,7 @@ async function getMdText(path: String, file: String) {
   mdShow.value = true
 }
 
-getMdText(route.params.path as string, route.params.file as string)
+getMdText(route.query.path as string, route.query.file as string)
 
 </script>
 

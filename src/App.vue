@@ -48,9 +48,9 @@ async function getMenu() {
 
 function getPathAndFile(menus) {
   let path , file;
-  if( route.params.path && route.params.file ) {
-    path = route.params.path;
-    file = route.params.file;
+  if( route.query.path && route.query.file ) {
+    path = route.query.path;
+    file = route.query.file;
     return [ path, file ]
   } else {
     let traceStr = sessionStorage.getItem('menuIndex')
@@ -81,7 +81,7 @@ function findMenu(menus, ids) {
 
 function toPage(menu: any, trace: Array<any>) {
   sessionStorage.setItem('menuIndex', JSON.stringify(trace))
-  router.push({ path: `/${trace[0].id}/${menu.id}`});
+  router.push({ path: `${process.env.BASE_URL}`, query: {path: trace[0].id, file: menu.id}});
 }
 
 getMenu()

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw, useRoute} from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw, useRoute} from 'vue-router';
 import MdDoc from '../components/MdDoc.vue';
 import App from '../App.vue';
 import lang from '../language'
@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
