@@ -50,7 +50,7 @@ export function mdSettings(app) {
   
   VMdPreview.use(createEmojiPlugin());
   VMdPreview.use(createTodoListPlugin());
-  VMdPreview.use(createLineNumbertPlugin());
+  // VMdPreview.use(createLineNumbertPlugin());
   VMdPreview.use(createAlignPlugin());
   VMdPreview.use(createCopyCodePlugin());
   app.use(VMdPreview);

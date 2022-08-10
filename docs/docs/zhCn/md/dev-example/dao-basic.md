@@ -11,7 +11,7 @@ public interface PersonDao extends NebulaDaoBasic<Person, String> {
 }
 ```
 
-## 创建一个 mapper.xml，默认位置为：/resources/mapper
+## 创建一个名为 PersonDao.xml 的文件，默认位置为：`/resources/mapper`
 ```xml
 <mapper namespace="your.domain.PersonDao">
 

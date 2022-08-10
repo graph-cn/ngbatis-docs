@@ -4,6 +4,7 @@ import { lang, setLang } from './language'
 import MenuChild from './components/MenuChild.vue'
 import axios from "axios"
 import { useRouter, useRoute } from "vue-router";
+import { widthLtHeight } from './utils/window-util'
 
 import { useDark, useToggle, useNavigatorLanguage } from '@vueuse/core'
 import { Moon, Sunny, Fold } from '@element-plus/icons-vue'
@@ -90,7 +91,7 @@ function toPage(menu: any, trace: Array<any>) {
 getMenu()
 const isVertial = ref(false)
 nextTick(() => {
-  isVertial.value = (document.body.clientWidth < document.body.offsetHeight)
+  isVertial.value = widthLtHeight()
 })
 
 </script>
@@ -100,7 +101,7 @@ nextTick(() => {
     <el-header>
       <el-row>
         <el-col :span="14">
-          <span>Ngbatis</span> 
+          <span ><a href="https://github.com/CorvusYe/ngbatis-docs" target="_blank">Ngbatis</a></span> 
           <span v-if="!isVertial" class="desc">
             <el-divider direction="vertical"/>{{$t('desc')}}
           </span>
@@ -139,7 +140,7 @@ nextTick(() => {
           <menu-child :menus="menus"></menu-child>
         </el-menu>
       </el-drawer>
-      <el-main width="100%">
+      <el-main width="100%" :class="{ isVertical: isVertical }">
         <router-view :key="$route.fullPath"/>
       </el-main>
     </el-container>
@@ -183,5 +184,9 @@ nextTick(() => {
 }
 #app .el-drawer .el-menu {
   border: none;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
 }
 </style>
