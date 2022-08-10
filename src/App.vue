@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
 import { lang, setLang } from './language'
 import MenuChild from './components/MenuChild.vue'
 import axios from "axios"
 import { useRouter, useRoute } from "vue-router";
 
 import { useDark, useToggle, useNavigatorLanguage } from '@vueuse/core'
-import { Moon, Sunny } from '@element-plus/icons-vue'
+import { Moon, Sunny, Fold } from '@element-plus/icons-vue'
 
 const languages = useNavigatorLanguage()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 const isSunny = ref(!isDark.value)
+const showMenu = ref(false)
+
 function turnLight() {
   isDark.value = !isSunny.value
 }
@@ -80,11 +82,16 @@ function findMenu(menus, ids) {
 
 
 function toPage(menu: any, trace: Array<any>) {
+  showMenu.value = false
   sessionStorage.setItem('menuIndex', JSON.stringify(trace))
   router.push({ path: `/`, query: {path: trace[0].id, file: menu.id}});
 }
 
 getMenu()
+const isVertial = ref(false)
+nextTick(() => {
+  isVertial.value = (document.body.clientWidth < document.body.offsetHeight)
+})
 
 </script>
 
@@ -92,11 +99,13 @@ getMenu()
   <el-container>
     <el-header>
       <el-row>
-        <el-col :span="22">
+        <el-col :span="14">
           <span>Ngbatis</span> 
-          <span class="desc">{{$t('desc')}}</span>
+          <span v-if="!isVertial" class="desc">
+            <el-divider direction="vertical"/>{{$t('desc')}}
+          </span>
         </el-col>
-        <el-col :span="2">
+        <el-col :span="10" style="text-align: right !important;">
           <el-switch v-model="isSunny"
             :active-icon="Sunny"
             :inactive-icon="Moon"
@@ -116,18 +125,26 @@ getMenu()
       </el-row>
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="200px" v-if="!isVertial">
         <el-menu @select="toPage" 
           :default-active="menu" 
           :default-openeds="defaultOpeneds">
           <menu-child :menus="menus"></menu-child>
         </el-menu>
       </el-aside>
+      <el-drawer size="70%" v-model="showMenu" direction="ltr" :show-close="false">
+        <el-menu @select="toPage" 
+          :default-active="menu" 
+          :default-openeds="defaultOpeneds">
+          <menu-child :menus="menus"></menu-child>
+        </el-menu>
+      </el-drawer>
       <el-main width="100%">
         <router-view :key="$route.fullPath"/>
       </el-main>
     </el-container>
   </el-container>
+  <el-button v-if="isVertial" type="primary" :icon="Fold" circle  style="position: fixed; right: 30px; bottom: 60px; z-index: 9999;" @click="showMenu = true"/>
 </template>
 
 <style scoped>
@@ -141,6 +158,8 @@ getMenu()
 
 #app .el-header .desc {
   font-size: 16px;
+  text-overflow: ellipsis;
+  max-lines: 1;
 }
 #app .el-container .el-aside .el-menu {
   height: calc( 100vh - 60px );
@@ -158,5 +177,11 @@ getMenu()
 }
 .el-switch {
   padding: 0px 8px;
+}
+.el-drawer  .el-drawer__body {
+  padding: 0 !important;
+}
+#app .el-drawer .el-menu {
+  border: none;
 }
 </style>

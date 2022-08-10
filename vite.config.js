@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   define: {
     'process.env': {
-      BASE_URL: '/ngbatis-docs'
+      BASE_URL: '/'
     }
   },
   optimizeDeps: {
