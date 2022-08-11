@@ -83,16 +83,4 @@ public class LikeWithRank {
 }
 ```
 
-### NRN2.java
-> A data structure used to represent triples
-```java
-package your.domain;
-
-public class NRN2 {
-    private Person n;
-    private Like r;
-    private Person n2;
-}
-```
-
 By now, the 'POJO' used in the two usage examples has been created. Let's start our coding journey.
