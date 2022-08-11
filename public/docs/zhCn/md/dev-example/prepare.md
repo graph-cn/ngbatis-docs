@@ -82,16 +82,4 @@ public class LikeWithRank {
 }
 ```
 
-### NRN2.java
-> 用于表示三元组的数据结构
-```java
-package your.domain;
-
-public class NRN2 {
-    private Person n;
-    private Like r;
-    private Person n2;
-}
-```
-
 到此，两种使用方式样例所用的 `POJO` 就已经创建完毕。接下来开始我们的介绍。

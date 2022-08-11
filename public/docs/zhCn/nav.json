@@ -32,6 +32,22 @@
       {
         "id": "custom-crud",
         "text": "自定义nGQL"
+      },
+      {
+        "id": "parameter-use",
+        "text": "如何传入参数"
+      },
+      {
+        "id": "result",
+        "text": "不同返回值类型"
+      },
+      {
+        "id": "parameter-if",
+        "text": "参数条件控制"
+      },
+      {
+        "id": "parameter-for",
+        "text": "参数遍历"
       }
     ]
   }

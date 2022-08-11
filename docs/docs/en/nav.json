@@ -32,6 +32,22 @@
       {
         "id": "custom-crud",
         "text": "By Custom nGQL"
+      },
+      {
+        "id": "parameter-use",
+        "text": "Param Usage"
+      },
+      {
+        "id": "result",
+        "text": "Result Mapping"
+      },
+      {
+        "id": "parameter-if",
+        "text": "Param Condition Control"
+      },
+      {
+        "id": "parameter-for",
+        "text": "Param Traversal"
       }
     ]
   }

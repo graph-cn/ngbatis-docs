@@ -126,7 +126,7 @@ nextTick(() => {
       </el-row>
     </el-header>
     <el-container>
-      <el-aside width="200px" v-if="!isVertial">
+      <el-aside width="300px" v-if="!isVertial">
         <el-menu @select="toPage" 
           :default-active="menu" 
           :default-openeds="defaultOpeneds">
@@ -188,5 +188,6 @@ nextTick(() => {
 
 a, a:link, a:visited, a:hover, a:active {
     text-decoration: none;
+    color: var(--el-color-primary) !important;
 }
 </style>
