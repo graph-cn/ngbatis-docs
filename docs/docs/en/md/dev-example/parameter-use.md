@@ -115,4 +115,4 @@
     ```
 
 ## 总结
-到此，关于参数获取的大致介绍完毕。如果有关于获取参数后的条件控制以及遍历的需求，请移步【[参数条件控制](./#/?path=dev-example&file=if)】、【[参数遍历](./#/?path=dev-example&file=for)】  
+到此，关于参数获取的大致介绍完毕。如果有关于获取参数后的条件控制以及遍历的需求，请移步【[参数条件控制](./#/?path=dev-example&file=parameter-if)】、【[参数遍历](./#/?path=dev-example&file=parameter-for)】  

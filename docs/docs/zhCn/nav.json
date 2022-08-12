@@ -23,7 +23,7 @@
     "children": [
       {
         "id": "prepare",
-        "text": "开始之前"
+        "text": "准备工作"
       },
       {
         "id": "dao-basic",
@@ -47,7 +47,7 @@
       },
       {
         "id": "parameter-for",
-        "text": "参数遍历"
+        "text": "参数循环"
       }
     ]
   }

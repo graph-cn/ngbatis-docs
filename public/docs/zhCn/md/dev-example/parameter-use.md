@@ -1,4 +1,5 @@
 # 如何传入参数
+
 通过【[自定义nGQL](./#/?path=dev-example&file=custom-crud)】我们已经知道了如何使自己编写的 `nGQL | cypher` 如何通过 java 调用并执行到 nebula 中。  
 接下来，将在当前部分介绍如何对自己编写的语句进行传参。
 > **注意**：所有参数基本类型目前只支持包装类，如 int 需要写成 Integer。
@@ -114,4 +115,4 @@
     ```
 
 ## 总结
-到此，关于参数获取的大致介绍完毕。如果有关于获取参数后的条件控制以及遍历的需求，请移步【[参数条件控制](./#/?path=dev-example&file=if)】、【[参数遍历](./#/?path=dev-example&file=for)】  
+到此，关于参数获取的大致介绍完毕。如果有关于获取参数后的条件控制以及遍历的需求，请移步【[参数条件控制](./#/?path=dev-example&file=parameter-if)】、【[参数遍历](./#/?path=dev-example&file=parameter-for)】  
