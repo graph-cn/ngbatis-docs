@@ -1,6 +1,20 @@
 # 不同返回值类型
 从nebula获得结果后，往往并不能获得业务所需的结果类型，此时，开发者需要告知 ngbatis 具体业务所需的类型。
 
+## 原始类型 [ResultSet](https://github.com/vesoft-inc/nebula-java/blob/master/client/src/main/java/com/vesoft/nebula/client/graph/data/ResultSet.java) (com.vesoft.nebula.client.graph.data.ResultSet)
+如果接口返回值为 nebula 的 ResultSet，ngbatis 不做任何处理，直接返回跟调用方，由开发者在调用方中自行处理结果集。
+- PersonDao.java
+  ```java
+    ResultSet returnResultSet();
+  ```
+- PersonDao.xml
+  ```xml
+  <select id="returnResultSet">
+      RETURN 'You are best'
+  </select>
+  ```
+- > 如果在下列的几种类型中，不能满足开发所需的结果集处理，可以使用获取原始ResultSet类型的返回值，并自行做灵活处理。可阅读[ResultSet源码]((https://github.com/vesoft-inc/nebula-java/blob/master/client/src/main/java/com/vesoft/nebula/client/graph/data/ResultSet.java))做近一步了解。
+
 ## 非集合类型
 此时，结果类型已经通过 方法的返回值类型告知 ngbatis，所以无需额外的配置，即可完成类型映射。
 ### 基本类型

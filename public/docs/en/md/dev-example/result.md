@@ -1,10 +1,25 @@
 # Result Mapping （The translation work is in progress...）
 
-从nebula获得结果后，往往并不能获得业务所需的结果类型，此时，开发者需要告知 ngbatis 具体业务所需的类型。
+After obtaining the results from nebula, it is often impossible to obtain the result type required by the business. At this time, the developer needs to inform ngbatis of the type required by the specific business.
 
-## 非集合类型
-此时，结果类型已经通过 方法的返回值类型告知 ngbatis，所以无需额外的配置，即可完成类型映射。
-### 基本类型
+## Original Type [`ResultSet`](https://github.com/vesoft-inc/nebula-java/blob/master/client/src/main/java/com/vesoft/nebula/client/graph/data/ResultSet.java) (com.vesoft.nebula.client.graph.data.ResultSet)
+If the returned value of the interface is the resultset of nebula, ngbatis will not do any processing, and will directly return it to the invoker. Developers can process the result set in the invoker.
+- PersonDao.java
+  ```java
+    ResultSet returnResultSet();
+  ```
+- PersonDao.xml
+  ```xml
+  <select id="returnResultSet">
+      RETURN 'Value wrapped by ResultSet'
+  </select>
+  ```
+- > If the result set processing required by development cannot be met in the following types, you can use to obtain the return value of the original `ResultSet` type and make flexible processing by yourself. See [Source code of ResultSet](https://github.com/vesoft-inc/nebula-java/blob/master/client/src/main/java/com/vesoft/nebula/client/graph/data/ResultSet.java) for more details.
+
+
+## Non Collection
+At this time, the result type has been notified to ngbatis through the return value type of the method, so the type mapping can be completed without additional configuration.
+### Basic Types
 - PersonDao.java
   ```java
     String returnString();
@@ -30,10 +45,10 @@
       LIMIT 1
   </select>
   ```
-- json序列化后，结果为：
+- After JSON serialization, the result is:
   ```json
     {
-      "name": "张三",
+      "name": "Tom",
       "age": 18,
       "birthday": "Fri Aug 12 2022 06:39:37 GMT+0800", // java.util.Date
       "gender": null
@@ -41,11 +56,11 @@
   ```
 
 
-## 集合类型
-因为运行时，方法在字节码中的集合泛型丢失，因此需要通过标签中的 `resultType` 属性告知 ngbatis，多行中单行结果的类型。
-### 单栏位返回值
+## Collection
+Because the collection generics of the method in the bytecode are lost at runtime, ngbatis needs to be informed of the type of row results in multiple rows through the 'resultType' attribute in the tag.
+### Single Column Return Value
 
-#### 基本类型
+#### Basic Types
 - PersonDao.java
   ```java
     List<String> returnNameTop10();
@@ -58,7 +73,7 @@
       LIMIT 10
   </select>
   ```
-- json序列化后，结果为：[ "张三", "李四", ... ]
+- After JSON serialization, the result is: [ "Tom", "Jerry", ... ]
 
 #### POJO
 - PersonDao.java
@@ -73,11 +88,11 @@
         LIMIT 10
     </select>
   ```
-- json序列化后，结果为：
+- After JSON serialization, the result is: 
   ```json
   [
     {
-      "name": "张三",
+      "name": "Tom",
       "age": 18,
       "birthday": "Fri Aug 12 2022 06:39:37 GMT+0800", // java.util.Date
       "gender": null
@@ -85,7 +100,7 @@
     ...
   ]
   ```
-  > 当返回值栏位只有一个时，读取内部属性映射到实体类属性
+  > When there is only one column as return value, read the schema internal attribute and map it to the entity class attribute.
 
 #### Map
 - PersonDao.java
@@ -100,11 +115,11 @@
         LIMIT 10
     </select>
   ```
-- json序列化后，结果为：
+- After JSON serialization, the result is: 
   ```json
   [
     {
-      "name": "张三",
+      "name": "Tom",
       "age": 18,
       "birthday": "Fri Aug 12 2022 06:39:37 GMT+0800", // java.util.Date
       "gender": null
@@ -112,9 +127,9 @@
     ...
   ]
   ```
-  > 当返回值栏位只有一个时，读取内部属性映射做为 map 的 key
+  > When there is only one column as return value, read the internal attribute map of the schema as the key of the map
 
-### 多栏位返回值
+### Multi Column Return Value
 #### POJO
 - PersonDao.java
   ```java
@@ -130,11 +145,11 @@
         LIMIT 10
     </select>
   ```
-- json序列化后，结果为：
+- After JSON serialization, the result is:
   ```json
   [
     {
-      "name": "张三",
+      "name": "Tom",
       "age": 18,
       "birthday": null,
       "gender": null
@@ -159,21 +174,23 @@
         LIMIT 10
     </select>
   ```
-- json序列化后，结果为：
+- After JSON serialization, the result is:
   ```json
   [
     {
-      "name": "张三",
+      "name": "Tom",
       "age": 18
     },
     ...
   ]
   ```
-  > 当返回值栏位只有一个时，读取内部属性映射做为 map 的 key
+  > When there is only one column as return value, read the internal attribute map of the schema as the key of the map
 
-## 复合对象类型（Path类型处理方式，三元组）
-**注意**：下列例子是当前版本处理 Path 结果集的举例
-### 声明复合对象类：
+## Compound object type (Path type processing method, triples as also)
+
+**Attention**: The following example is an example of processing the path result set in the current version
+
+### Declaring a Composite Object Class:
   - NRN2.java
     ```java
     package your.domain;
@@ -184,7 +201,7 @@
         private Person n2;
     }
     ```
-### 非集合类型
+### Non-Collection
   - PersonDao.java
     ```java
       NRN2 returnFirstRelation();
@@ -197,7 +214,7 @@
         LIMIT 1
     </select>
     ```
-### 集合类型
+### Collection
   - PersonDao.java
     ```java
       List<NRN2> returnRelationTop10();
@@ -210,4 +227,4 @@
         LIMIT 10
     </select>
     ```
-  - > 使用 List<Map> 做为返回值同样奏效，n, r, n2 为 map 的 key
+  - > Using List<Map> as the return value also works，n, r, n2 are the keys of the map

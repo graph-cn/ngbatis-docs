@@ -132,6 +132,7 @@ nextTick(() => {
           :default-openeds="defaultOpeneds">
           <menu-child :menus="menus"></menu-child>
         </el-menu>
+        <center style="color: var(--el-color-info)">v1.1.0-beta</center>
       </el-aside>
       <el-drawer size="70%" v-model="showMenu" direction="ltr" :show-close="false">
         <el-menu @select="toPage" 
@@ -139,9 +140,16 @@ nextTick(() => {
           :default-openeds="defaultOpeneds">
           <menu-child :menus="menus"></menu-child>
         </el-menu>
+        <center style="color: var(--el-color-info)">v1.1.0-beta</center>
       </el-drawer>
       <el-main width="100%" :class="{ isVertical: isVertical }">
         <router-view :key="$route.fullPath"/>
+        <div class="copy-right">
+          <span>{{$t('copyRight')}}</span>
+          <span><a href="https://github.com/nebula-contrib" target="_blank">{{$t('organization')}}</a></span>
+          <span> & </span>
+          <span><a href="https://github.com/CorvusYe" target="_blank">{{$t('author')}}</a></span>
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -163,8 +171,18 @@ nextTick(() => {
   max-lines: 1;
 }
 #app .el-container .el-aside .el-menu {
-  height: calc( 100vh - 60px );
+  height: calc( 100vh - 90px );
 }
+
+#app .el-container .copy-right {
+  line-height: 30px;
+  text-align: center;
+  color: var(--el-color-info-light-3) !important;
+}
+.copy-right a[data-v-7a7a37b1], .copy-right a[data-v-7a7a37b1]:link, .copy-right a[data-v-7a7a37b1]:visited, .copy-right a[data-v-7a7a37b1]:hover, .copy-right a[data-v-7a7a37b1]:active{
+  color: var(--el-color-info-light-3) !important;
+}
+
 #app .el-container {
   height: 100vh;
   width: 100vw;

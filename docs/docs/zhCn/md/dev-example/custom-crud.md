@@ -14,8 +14,8 @@
   >   + @}                 
   >   ```
   > - [Beetl文档-用于处理参数的函数](https://www.kancloud.cn/xiandafu/beetl3_guide/2138956) 
-  > - [Beetl文档-循环语句](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)【例子详见[参数条件控制](./#?path=dev-example&file=parameter-if)】
-  > - [Beetl文档-条件控制](https://www.kancloud.cn/xiandafu/beetl3_guide/2138953)【例子详见[参数遍历](./#?path=dev-example&file=parameter-for)】
+  > - [Beetl文档-条件控制](https://www.kancloud.cn/xiandafu/beetl3_guide/2138953)【例子详见[参数条件控制](./#?path=dev-example&file=parameter-if)】
+  > - [Beetl文档-循环语句](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)【例子详见[参数遍历](./#?path=dev-example&file=parameter-for)】
   > - [Beetl在线测试小工具](http://ibeetl.com/beetlonline/)
 
 

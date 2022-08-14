@@ -3,10 +3,10 @@
 > 遍历的部分跟 mybatis 的差异比较大，使用了 Beetl 的遍历语法。具体可参考官方文档【[1.10 循环语句](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)】
 > 因配置的差异，文档中如涉及界定符，则由文档中的 <% %> 替换成 @ \n，如：
   ```diff
-  - <%if ( aBool ) { 
+  - <%for ( item in list ) { 
   -                         
   - } %>                
-  + @if ( aBool ) {
+  + @for ( item in list ) {
   +                       
   + @}                 
   ```
@@ -39,12 +39,12 @@
     ```java
         // org.springframework.data.repository.query.Param
         // personList: [{"gender":"F","name":"张三"},{"gender":"M","name":"王五"},{"gender":"F","name":"赵六"}]
-        void insertPersonList( List<Person> personList );
+        void insertPersonList( @Param("personList") List<Person> personList );
     ```
 
 - 参数为：
     ```json
-      [{"gender":"F","name":"张三"},{"gender":"M","name":"王五"},{"gender":"F","name":"赵六"}]
+      :param personList => [{"gender":"F","name":"张三"},{"gender":"M","name":"王五"},{"gender":"F","name":"赵六"}]
     ```
 
 - PersonDao.xml
@@ -63,7 +63,7 @@
         INSERT VERTEX `person` ( name, gender ) VALUES '赵六' : ( '赵六', 'F' );
     ```
 
-### nebula >= v3.2.0  起，多了下面的用法，可以传参数变量名给数据库
+### nebula >= v3.2.0  起，多了下面的用法，在修改数据的时候可以传参数变量名给数据库
   - PersonDao.xml
       ```xml
         <insert id="insertPersonList">
@@ -74,8 +74,8 @@
         </insert>
       ```
       > 此处，当前元素是 xxx 时，`LP` 做为后缀，可用于多种循环变量的获取
-      > - xxxLP.index当前的索引：从1开始
-      > - xxxLP.dataIndex 索引：从0开始
+      > - xxxLP.index：当前索引，从1开始
+      > - xxxLP.dataIndex：当前索引，从0开始
       > - xxxLP.size：集合的长度
       > - xxxLP.first：是否是第一个
       > - xxxLP.last：是否是最后一个

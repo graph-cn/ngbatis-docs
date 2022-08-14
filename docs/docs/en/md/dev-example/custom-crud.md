@@ -1,10 +1,9 @@
-# By Custom nGQL（The translation work is in progress...）
+# By Custom nGQL
 
-- > 使用此方式的时候，对 nGQL、cypher 的熟悉度要求会高一些。还不太熟悉的开发者，可以通过【[什么是nGQL](https://docs.nebula-graph.com.cn/3.1.0/3.ngql-guide/1.nGQL-overview/1.overview/)】进行了解。
-- > 另外提一下：这边使用的模板引擎是Beetl
-  > - [Beetl官方文档](https://www.kancloud.cn/xiandafu/beetl3_guide/2138947)，主要看占位符。ngbatis已经做好了变量设置，如果只是参数填充，可以忽略定界符的使用。   
-  【例子详见[如何传入参数](./#?path=dev-example&file=parameter-use)】  
-  但，参数条件控制跟参数循环定界符几乎不可避免。因`ngbatis`关于`beetl`配置的差异，文档中如涉及界定符，则由文档中的 <% %> 替换成 @ \n，如：
+- > When using this method, the familiarity with nGQL and cypher will be higher. Developers who are not familiar with it can learn about it through【[What Is nGQL](https://docs.nebula-graph.com.cn/3.1.0/3.ngql-guide/1.nGQL-overview/1.overview/)】.
+- > In addition, the template engine used here is Beetl.
+  > - [Beetl Docs-Delimiters And Placeholder Symbols](https://www.kancloud.cn/xiandafu/beetl3_guide/2138947), mainly look at placeholders. Ngbatis has made variable settings. If it is only parameter filling, you can ignore the use of delimiters. 【See [[Param Usage](./#?path=dev-example&file=parameter-use)] for details】
+  However, parameter condition control and parameter loop delimiter are almost inevitable. Due to the difference in configuration of `Beetl` in `ngbatis`, if the delimiter is involved in the document, the `<% %>` will be replaced by `@ \n`, for example:
   >   ```diff
   >   - <%if ( aBool ) { 
   >   -                         
@@ -13,16 +12,16 @@
   >   +                       
   >   + @}                 
   >   ```
-  > - [Beetl文档-用于处理参数的函数](https://www.kancloud.cn/xiandafu/beetl3_guide/2138956) 
-  > - [Beetl文档-循环语句](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)【例子详见[参数条件控制](./#?path=dev-example&file=parameter-if)】
-  > - [Beetl文档-条件控制](https://www.kancloud.cn/xiandafu/beetl3_guide/2138953)【例子详见[参数遍历](./#?path=dev-example&file=parameter-for)】
-  > - [Beetl在线测试小工具](http://ibeetl.com/beetlonline/)
+  > - [Beetl Docs-Functions Used to Process Parameters](https://www.kancloud.cn/xiandafu/beetl3_guide/2138956) 
+  > - [Beetl Docs-Condition Control Statements](https://www.kancloud.cn/xiandafu/beetl3_guide/2138953)【See [Param Condition Control](./#?path=dev-example&file=parameter-if) for details】
+  > - [Beetl Docs-Loop Statements](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)【See [Param Loop](./#?path=dev-example&file=parameter-for) for details】
+  > - [Beetl-Online test widget](http://ibeetl.com/beetlonline/)
 
 
-与[使用基类读写](./#/?path=dev-example&file=dao-basic)相同，需要编写一个 XXXDao.java 文件与 XXXDao.xml 文件。
+The same as [By Basic DAO](./#/?path=dev-example&file=dao-basic), We need to create a  XXXDao.java file and  XXXDao.xml file.
 
-## 新建文件
-### 创建一个Person对应的Dao，如果不需要用到基类方法，可以不继承 NebulaDaoBasic
+## Creating file in Dao layer
+### Create a Dao corresponding to Person. If you do not need to use the basic class method, it is unnecessary to inherit NebulaDaoBasic.
 ```java
 package your.domain;
 
@@ -33,26 +32,26 @@ public interface PersonDao {
 }
 ```
 
-### 创建一个名为 PersonDao.xml 的文件，默认位置为：`/resources/mapper`
+### Create a file named PersonDao.xml file. The default location is: `/resources/mapper`
 ```xml
 <mapper namespace="your.domain.PersonDao">
 
 </mapper>
 ```
-> XXXDao.java 无需经过 @Mapper 或者 @Component 进行注解，而是通过 namespace 进行发现，并自动注册成 Bean。
-> 前提是：namespace 需要在 @SpringBootApplication 注解下的 scanBasePackages 值中。
-> 如：@SpringBootApplication( scanBasePackages = { "your.domain", "org.nebula.contrib" } )
+> XXXDao.java does not need to be annotated by `@Mapper` or `@Component`, it will be discovered by namespace and automatically registered as a bean.
+> The premise is that the namespace needs to be in the scanBasePackages value under the @SpringBootApplication annotation.
+> For example: @SpringBootApplication( scanBasePackages = { "your.domain", "org.nebula.contrib" } )
 
-## 如何让 java 程序通过 ngbatis 执行 nGQL | cypher
+## How to let Java programs execute ` nGQL | cypher` through ngbatis
 
-### 以一个简单的查询语句为例：
-#### 在 PersonDao.java 中追加接口
+### Take a simple query statement as an example:
+#### Adding interface in PersonDao.java
 ```java
   Integer select1();
 ```
-> 目前版本中，接口的返回值类型与方法参数类型，如果是基本类型，仅支持包装类，如 int 请写成 Integer。
+> In the current version, the return value type and method parameter type of the interface. If it is a basic type, only the wrapper class is supported. For example, please write int as Integer.
 
-#### 在 PersonDao.xml 中新增一个标签
+#### Adding a tag in PersonDao.xml
 ```xml
   <select id="select1">
     RETURN 1

@@ -64,7 +64,7 @@
     ```
 
 #### POJO 或 Map
-##### 参数列表只有一个时：
+##### 参数只有一个时：
 - PersonDao.java
     ```java
         Person selectByName( Person person );
@@ -79,7 +79,7 @@
     </select>
     ```
 
-##### 参数列表有两个及以上时：
+##### 参数有两个及以上时：
 - PersonDao.java
     ```java
         // params = { age: 18 }

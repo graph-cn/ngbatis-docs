@@ -1,14 +1,14 @@
-# Param Usage （The translation work is in progress...）
+# Param Usage
 
-通过【[自定义nGQL](./#/?path=dev-example&file=custom-crud)】我们已经知道了如何使自己编写的 `nGQL | cypher` 如何通过 java 调用并执行到 nebula 中。  
-接下来，将在当前部分介绍如何对自己编写的语句进行传参。
-> **注意**：所有参数基本类型目前只支持包装类，如 int 需要写成 Integer。
+Through【[By Custom nGQL](./#/?path=dev-example&file=custom-crud)】, we have known how to make the `nGQL | cypher` written by ourselves call and execute it into Nebula through Java.
+Next, in this section, we will introduce how to pass parameters to the statements.
+> **Attention**: The basic types of all parameters currently only support wrapper classes. For example, `int` needs to be written as `Integer`.
 
-## 在 `nGQL | cypher` 中读取参数
+## Read Parameters in `nGQL | cypher`
 
-### 具名参数
-> 参数被 @Param 所注解。org.springframework.data.repository.query.Param
-#### 简单类型
+### Named Parameters
+> The parameters are annotated by @Param. ( org.springframework.data.repository.query.Param )
+#### Basic Types
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
@@ -25,7 +25,7 @@
     </select>
     ```
 
-#### POJO 或 Map
+#### POJO or Map
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
@@ -40,14 +40,14 @@
         LIMIT 1
     </select>
     ```
-> 参数读取支持 `.` 运算符
+> Parameter reading supports `.` operator
 
-### 匿名参数
-- 如果在接口中声明的参数中，不带 @Param 注解，则使用下标位进行获取，即 $p0、$p1、$p2、$p3 ...
-- 参数列表长度为1，类型为 POJO 或 Map 时，可直接读取属性
+### Anonymous Parameters
+- If there is no @Param annotation in the parameters declared in the interface, the index is used to obtain, that is: $p0、$p1、$p2、$p3 ...
+- When the length of the parameter list is 1 and the type is POJO or Map, the attribute can be read directly
 
 
-#### 基本类型
+#### Basic Types
 - PersonDao.java
     ```java
     Person selectByName( String name );
@@ -63,8 +63,8 @@
     </select>
     ```
 
-#### POJO 或 Map
-##### 参数列表只有一个时：
+#### POJO or Map
+##### When there is only one parameter:
 - PersonDao.java
     ```java
         Person selectByName( Person person );
@@ -79,7 +79,7 @@
     </select>
     ```
 
-##### 参数列表有两个及以上时：
+##### When there are two or more parameters:
 - PersonDao.java
     ```java
         // params = { age: 18 }
@@ -96,10 +96,10 @@
         </select>
     ```
 
-### 集合类型的参数获取，与基本类型一致。
-- 匿名时，使用 $p0，$p1，...
-- 具名时，直接使用注解内的参数名
-- 如果是基本类型的集合，不需要做复杂处理，可以直接传入
+### The parameter acquisition of the collection type is consistent with the basic types.
+- When anonymous, use $p0，$p1，...;
+- When naming, directly use the parameter name in the annotation;
+- If it is a collection of basic types, it can be directly passed in without complex processing.
 ---
 - PersonDao.java
     ```java
@@ -114,5 +114,5 @@
         </select>
     ```
 
-## 总结
-到此，关于参数获取的大致介绍完毕。如果有关于获取参数后的条件控制以及遍历的需求，请移步【[参数条件控制](./#/?path=dev-example&file=parameter-if)】、【[参数遍历](./#/?path=dev-example&file=parameter-for)】  
+## Conclusion
+This completes the general introduction of parameter acquisition. If you have requirements for condition control and traversal after obtaining parameters, please move to【[Param Condition Control](./#/?path=dev-example&file=parameter-if)】、【[Param Loop](./#/?path=dev-example&file=parameter-for)】  

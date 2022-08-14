@@ -1,7 +1,7 @@
-# Param Condition Control（The translation work is in progress...）
+# Param Condition Control
 
-> 语法参考【[Beetl 条件控制](https://www.kancloud.cn/xiandafu/beetl3_guide/2138953)】
-> 因配置的差异，文档中如涉及界定符，则由文档中的 <% %> 替换成 @，如：
+> Syntax reference:【[Beetl-Condition Control](https://www.kancloud.cn/xiandafu/beetl3_guide/2138953)】
+> Due to the difference in configuration of `Beetl` in `ngbatis`, the `<% %>` will be replaced by `@ \n`, for example：
   ```diff
   - <%if ( aBool ) { 
   -                         
@@ -11,7 +11,7 @@
   + @}                 
   ```
 
-## 三元表达式的使用
+## Use of Ternary Expressions
 - PersonDao.java
     ```java
         Person selectByNameIfNotEmpty( String name );
@@ -28,7 +28,7 @@
         </select>
     ```
 
-## if 的使用
+## Use of if
 - PersonDao.java
     ```java
         // params = { age: 18 }
@@ -49,7 +49,7 @@
           LIMIT 1
       </select>
     ```
-## if-else 的使用
+## Use of if-else
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
@@ -71,7 +71,7 @@
         </select>
     ```
 
-## switch case的使用
+## Use of switch-case
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
@@ -97,9 +97,9 @@
             LIMIT 1
         </select>
     ```
-- > **注意**: 此处放入 switch 的变量，不可为 null
+- > **Attention**: the switch variable placed here cannot be null
 
-## select case 的使用
+## Use of select case
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
@@ -123,7 +123,7 @@
     ```
 
 
-## decode 函数的使用
+## Use of decode
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
@@ -144,5 +144,5 @@
             LIMIT 1
         </select>
     ```
-## 总结
-到此，可用于条件判断的方式基本介绍完成。只能用于入参时的判断。返回值不能使用条件控制。
+## Conclusion
+At this time, the methods that can be used for condition control are basically introduced. Judgment can only be made when inputting parameters. The return value cannot be controlled by conditions.

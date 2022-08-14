@@ -1,21 +1,21 @@
-# Param Loop（The translation work is in progress...）
+# Param Loop
 
-> 遍历的部分跟 mybatis 的差异比较大，使用了 Beetl 的遍历语法。具体可参考官方文档【[1.10 循环语句](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)】
-> 因配置的差异，文档中如涉及界定符，则由文档中的 <% %> 替换成 @ \n，如：
+> There is a big difference between ngbatis and mybatis in the loop part, and the loop syntax of Beetl is used. Please refer to official documents for details.【[1.10 Loop statement](https://www.kancloud.cn/xiandafu/beetl3_guide/2138952)】
+> Due to the difference in configuration of `Beetl` in `ngbatis`, the `<% %>` will be replaced by `@ \n`, for example：
   ```diff
-  - <%if ( aBool ) { 
+  - <%for ( item in list ) { 
   -                         
   - } %>                
-  + @if ( aBool ) {
+  + @for ( item in list ) {
   +                       
   + @}                 
   ```
 
-## 对Map的遍历，可用于动态查询
+## Looping in Map , which can be used for dynamic query
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
-        // person: { "name": "张三", "gender": "F" }
+        // person: { "name": "Diana", "gender": "F" }
         Person selectByPerson( @Param("p") Person person );
     ```
 
@@ -34,17 +34,17 @@
         </select>
     ```
 
-## 对 List 遍历，可用于批处理
+## Looping in List , which can be used for batch processing
 - PersonDao.java
     ```java
         // org.springframework.data.repository.query.Param
-        // personList: [{"gender":"F","name":"张三"},{"gender":"M","name":"王五"},{"gender":"F","name":"赵六"}]
-        void insertPersonList( List<Person> personList );
+        // personList: [{"gender":"F","name":"Diana"},{"gender":"M","name":"Tom"},{"gender":"F","name":"Jerry"}]
+        void insertPersonList( @Param("personList") List<Person> personList );
     ```
 
-- 参数为：
+- The parameter is :
     ```json
-      [{"gender":"F","name":"张三"},{"gender":"M","name":"王五"},{"gender":"F","name":"赵六"}]
+      :param personList => [{"gender":"F","name":"Diana"},{"gender":"M","name":"Tom"},{"gender":"F","name":"Jerry"}]
     ```
 
 - PersonDao.xml
@@ -56,14 +56,14 @@
         </insert>
     ```
 
-- 执行的语句为：
+- The statements to be executed are: 
     ```sql
-        INSERT VERTEX `person` ( name, gender ) VALUES '张三' : ( '张三', 'F' );
-        INSERT VERTEX `person` ( name, gender ) VALUES '王五' : ( '王五', 'M' );
-        INSERT VERTEX `person` ( name, gender ) VALUES '赵六' : ( '赵六', 'F' );
+        INSERT VERTEX `person` ( name, gender ) VALUES 'Diana' : ( 'Diana', 'F' );
+        INSERT VERTEX `person` ( name, gender ) VALUES 'Tom' : ( 'Tom', 'M' );
+        INSERT VERTEX `person` ( name, gender ) VALUES 'Jerry' : ( 'Jerry', 'F' );
     ```
 
-### nebula >= v3.2.0  起，多了下面的用法，可以传参数变量名给数据库
+### Since nebula v3.2.0, the following usage has been added. When modifying data, the parameter variable name can be passed to the database.
   - PersonDao.xml
       ```xml
         <insert id="insertPersonList">
@@ -73,21 +73,21 @@
             @}
         </insert>
       ```
-      > 此处，当前元素是 xxx 时，`LP` 做为后缀，可用于多种循环变量的获取
-      > - xxxLP.index当前的索引：从1开始
-      > - xxxLP.dataIndex 索引：从0开始
-      > - xxxLP.size：集合的长度
-      > - xxxLP.first：是否是第一个
-      > - xxxLP.last：是否是最后一个
-      > - xxxLP.even：索引是否是偶数
-      > - xxxLP.odd：索引是否是奇数
+    > Here, when the current element is xxx,  `LP` is used as the suffix, which can be used to obtain multiple loop variables.
+    > - xxxLP.index: current index, starting from 1
+    > - xxxLP.dataIndex: current index: starting from 0
+    > - xxxLP.size: length of the collect
+    > - xxxLP.first: is it the first
+    > - xxxLP.last: is it the last
+    > - xxxLP.even: whether the index is even
+    > - xxxLP.odd: whether the index is odd
 
-  - 执行的语句为：
+  - The statements to be executed are: 
       ```sql
         INSERT VERTEX `person` ( name, gender )
-          VALUES '张三' : ( '$personList[0].name', '$personList[0].gender' );
+          VALUES 'Diana' : ( '$personList[0].name', '$personList[0].gender' );
         INSERT VERTEX `person` ( name, gender )
-          VALUES '王五' : ( '$personList[1].name', '$personList[1].gender' );
+          VALUES 'Tom' : ( '$personList[1].name', '$personList[1].gender' );
         INSERT VERTEX `person` ( name, gender )
-          VALUES '赵六' : ( '$personList[2].name', '$personList[2].gender' );
+          VALUES 'Jerry' : ( '$personList[2].name', '$personList[2].gender' );
       ```
