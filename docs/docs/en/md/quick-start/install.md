@@ -2,14 +2,11 @@
 
 ## Adding in `pom.xml`：
 ```xml
-  <!--  in label for project  -->
-  <dependencies>
-		<dependency>
-			<groupId>org.nebula-contrib</groupId>
-			<artifactId>ngbatis</artifactId>
-			<version>1.1.0-beta</version>
-		</dependency>
-	</dependencies>
+    <dependency>
+        <groupId>org.nebula-contrib</groupId>
+        <artifactId>ngbatis</artifactId>
+        <version>1.1.0-beta</version>
+    </dependency>
 ```
 
 ## Adding  data source configuration in `application.yml`

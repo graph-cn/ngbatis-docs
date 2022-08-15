@@ -1,14 +1,11 @@
 # 安装与使用
 ## 在 `pom.xml` 中添加：
 ```xml
-  <!--  project 标签下  -->
-  <dependencies>
-		<dependency>
-			<groupId>org.nebula-contrib</groupId>
-			<artifactId>ngbatis</artifactId>
-			<version>1.1.0-beta</version>
-		</dependency>
-	</dependencies>
+    <dependency>
+        <groupId>org.nebula-contrib</groupId>
+        <artifactId>ngbatis</artifactId>
+        <version>1.1.0-beta</version>
+    </dependency>
 ```
 
 ## 在 `application.yml` 配置数据源 
