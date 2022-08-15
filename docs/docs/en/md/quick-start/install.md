@@ -3,19 +3,6 @@
 ## Adding in `pom.xml`：
 ```xml
   <!--  in label for project  -->
-  <distributionManagement>
-      <snapshotRepository>
-          <id>ossrh</id>
-          <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-      </snapshotRepository>
-      <repository>
-          <id>ossrh</id>
-          <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-      </repository>
-  </distributionManagement>
-```
-```xml
-  <!--  in label for project  -->
   <dependencies>
 		<dependency>
 			<groupId>org.nebula-contrib</groupId>
