@@ -41,13 +41,16 @@ html, body {
 }
 .v-md-mermaid .messageLine0 {
   stroke: var(--el-color-primary-light-7) !important;
-  fill: var(--el-color-primary-light-7) !important;
+}
+.v-md-mermaid .labelBox {
+  fill: var(--el-color-primary-light-9) !important;
+  stroke: var(--el-color-primary-light-7) !important;
 }
 
-html.dark foreignObject, html.dark foreignObject .nodeLabel {
+html.dark foreignObject, html.dark foreignObject .nodeLabel{
   color: white !important;
 }
-html.dark svg tspan {
+html.dark svg tspan , html.dark .labelText, html.dark text.loopText {
   fill: white !important;
 }
 html.dark .v-md-mermaid .messageText {

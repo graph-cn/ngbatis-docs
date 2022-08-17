@@ -50,5 +50,19 @@
         "text": "参数循环"
       }
     ]
+  },
+  {
+    "id": "step-forward-docs",
+    "text": "了解更多",
+    "children": [
+      {
+        "id": "operation-sequence",
+        "text": "运行时序"
+      },
+      {
+        "id": "advanced-configuration",
+        "text": "进阶配置"
+      }
+    ]
   }
 ]

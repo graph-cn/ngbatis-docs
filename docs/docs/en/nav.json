@@ -50,5 +50,19 @@
         "text": "Param Loop"
       }
     ]
+  },
+  {
+    "id": "step-forward-docs",
+    "text": "More Details",
+    "children": [
+      {
+        "id": "operation-sequence",
+        "text": "Operatior Sequence"
+      },
+      {
+        "id": "advanced-configuration",
+        "text": "Advanced Configuration"
+      }
+    ]
   }
 ]
