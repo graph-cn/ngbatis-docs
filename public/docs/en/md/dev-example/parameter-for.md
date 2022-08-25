@@ -62,7 +62,7 @@
         INSERT VERTEX `person` ( name, gender ) VALUES 'Tom' : ( 'Tom', 'M' );
         INSERT VERTEX `person` ( name, gender ) VALUES 'Jerry' : ( 'Jerry', 'F' );
     ```
-
+<!-- 
 ### Since nebula v3.2.0, the following usage has been added. When modifying data, the parameter variable name can be passed to the database.
   - PersonDao.xml
       ```xml
@@ -91,3 +91,4 @@
         INSERT VERTEX `person` ( name, gender )
           VALUES 'Jerry' : ( '$personList[2].name', '$personList[2].gender' );
       ```
+-->

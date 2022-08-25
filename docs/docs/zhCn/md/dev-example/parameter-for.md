@@ -62,7 +62,7 @@
         INSERT VERTEX `person` ( name, gender ) VALUES '王五' : ( '王五', 'M' );
         INSERT VERTEX `person` ( name, gender ) VALUES '赵六' : ( '赵六', 'F' );
     ```
-
+<!-- 
 ### nebula >= v3.2.0  起，多了下面的用法，在修改数据的时候可以传参数变量名给数据库
   - PersonDao.xml
       ```xml
@@ -91,3 +91,4 @@
         INSERT VERTEX `person` ( name, gender )
           VALUES '赵六' : ( '$personList[2].name', '$personList[2].gender' );
       ```
+-->
