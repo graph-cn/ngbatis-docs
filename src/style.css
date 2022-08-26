@@ -89,6 +89,12 @@ html.dark .v-md-pre-wrapper .line-numbers-wrapper{
 .github-markdown-body code, .github-markdown-body pre {
   font-family: '微软雅黑' !important
 }
+.github-markdown-body table tr:nth-child(2n) {
+  background-color: #99999900 !important;
+}
+.github-markdown-body table tr:nth-child(2n+1) {
+  background-color: #99999919 !important;
+}
 
 .expanded {
   flex-grow: 1;
