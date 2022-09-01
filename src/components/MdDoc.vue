@@ -4,7 +4,9 @@ import { defineComponent, ref } from "vue";
 import { useRoute } from 'vue-router'
 import axios from "axios"
 import { ElLoading } from 'element-plus'
+import { currentVersion } from '../utils/window-util';
 
+const version = ref(currentVersion())
 let route = useRoute()
 
 console.info(route.query.file)
@@ -22,7 +24,7 @@ async function getMdText(path: String, file: String) {
   try {
     const res = await axios({
       method: 'get',
-      url: `./docs/${lang}/md/${path}/${file}.md`
+      url: `./docs/${version.value}/${lang}/md/${path}/${file}.md`
     })
     mdContent.value = await res.data
     mdShow.value = true
@@ -43,6 +45,7 @@ getMdText(route.query.path as string, route.query.file as string)
 <style scoped>
 .md {
   max-width: 1180px;
+  min-height: calc(100vh - 90px);
   margin: 0 auto;
   width: 100%;
 }

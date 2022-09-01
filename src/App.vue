@@ -4,7 +4,8 @@ import { lang, setLang } from './language'
 import MenuChild from './components/MenuChild.vue'
 import axios from "axios"
 import { useRouter, useRoute } from "vue-router";
-import { widthLtHeight } from './utils/window-util'
+import { currentVersion, widthLtHeight, setVersion } from './utils/window-util'
+import { ElLoading } from 'element-plus'
 
 import { useDark, useToggle, useNavigatorLanguage } from '@vueuse/core'
 import { Moon, Sunny, Fold } from '@element-plus/icons-vue'
@@ -26,6 +27,11 @@ let route = useRoute()
 let menus = ref([])
 let defaultOpeneds = ref([])
 let menu = ref(undefined as any)
+let pathId = ref(undefined)
+let menuId = ref(undefined)
+
+const versions = ref([])
+const version = ref(currentVersion())
 
 defineComponent({
   name: 'app',
@@ -34,13 +40,18 @@ defineComponent({
 
 function switchLang() {
   setLang(prefLang.value);
-  location.reload();
+  forceGo();
+}
+
+function switchVersion() {
+  setVersion(version.value)
+  forceGo();
 }
 
 async function getMenu() {
   const res = await axios({
     method: 'get',
-    url: `./docs/${lang}/nav.json`
+    url: `./docs/${version.value}/${lang}/nav.json`
   })
 
   menus.value = await res.data
@@ -81,11 +92,40 @@ function findMenu(menus, ids) {
   }
 }
 
+async function getVersions() {
+  const loadingInstance1 = ElLoading.service({ fullscreen: false, target: '.j_doc' })
+  try {
+    const res = await axios({
+      method: 'get',
+      url: `./docs/versions.json`
+    })
+    versions.value = await res.data
+  } catch (e) {}
+  loadingInstance1.close()
+}
 
 function toPage(menu: any, trace: Array<any>) {
   showMenu.value = false
   sessionStorage.setItem('menuIndex', JSON.stringify(trace))
-  router.push({ path: `/`, query: {path: trace[0].id, file: menu.id}});
+  pathId.value = trace[0].id
+  menuId.value = menu.id
+  go()
+}
+
+function go() {
+  router.push({
+    path: `/`,
+    query: {
+      path: pathId.value,
+      file: menuId.value,
+      v: version.value
+    }
+  });
+}
+
+function forceGo() {
+  location.hash = `#/?path=${pathId.value}&file=${menuId.value}&v=${version.value}`
+  location.reload()
 }
 
 getMenu()
@@ -93,6 +133,8 @@ const isVertial = ref(false)
 nextTick(() => {
   isVertial.value = widthLtHeight()
 })
+
+getVersions();
 
 </script>
 
@@ -132,7 +174,19 @@ nextTick(() => {
           :default-openeds="defaultOpeneds">
           <menu-child :menus="menus"></menu-child>
         </el-menu>
-        <center style="color: var(--el-color-info)">v1.1.0-beta</center>
+        <center style="color: var(--el-color-info)">
+          <el-select v-model="version" 
+              @change="switchVersion"
+              size="small">
+            <el-option 
+              v-for="v in versions"
+              :key="v.version"
+              :label="v.version"
+              :value="v.version">
+              <span>{{v.version}}</span><el-icon><Upload/></el-icon>
+            </el-option>
+          </el-select>
+        </center>
       </el-aside>
       <el-drawer size="70%" v-model="showMenu" direction="ltr" :show-close="false">
         <el-menu @select="toPage" 
@@ -140,7 +194,18 @@ nextTick(() => {
           :default-openeds="defaultOpeneds">
           <menu-child :menus="menus"></menu-child>
         </el-menu>
-        <center style="color: var(--el-color-info)">v1.1.0-beta</center>
+        <center style="color: var(--el-color-info)">
+          <el-select v-model="version" 
+              @change="switchVersion"
+               size="small">
+            <el-option 
+              v-for="v in versions"
+              :key="v.version"
+              :label="v.version"
+              :value="v.version">
+            </el-option>
+          </el-select>
+        </center>
       </el-drawer>
       <el-main width="100%" :class="{ isVertical: isVertical }">
         <router-view :key="$route.fullPath"/>
