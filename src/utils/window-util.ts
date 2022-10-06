@@ -29,5 +29,5 @@ export function setVersion(version) {
 }
 
 export function getVersion() : string {
-  return localStorage.getItem('v') ?? 'v1.1.0-beta'
+  return localStorage.getItem('v') ?? 'v1.1.0-rc'
 }
