@@ -16,6 +16,7 @@ Ngbatis 提供了两种方式为开发者提供便利
 CREATE tag `person` (
   `name` string NULL  , 
   `gender` string NULL  , 
+  `height` double NULL ,
   `age` int NULL  , 
   `birthday` date NULL  
 );
@@ -51,6 +52,8 @@ public class Person {
     /** use @Column to declare field's schema name in database */
     @Column("gender")
     private String gender;
+    @ValueType(Double.class)
+    private BigDecimal height;
     private Integer age;
     private Date birthday;
 
