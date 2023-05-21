@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, withBase } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,6 +6,9 @@ export default defineConfig({
   title: "Ngbatis Docs",
   description: "Development documentation for ngbatis",
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/index' },
