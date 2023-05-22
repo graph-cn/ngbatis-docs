@@ -36,7 +36,7 @@ export default defineConfig({
           { text: '自定义nGQL', link: '/dev-example/custom-crud' },
           { text: '如何传入参数', link: '/dev-example/parameter-use' },
           { text: '不同返回值类型', link: '/dev-example/result' },
-          { text: '内置返回值类型', link: '/dev-example/result-inside' },
+          { text: '内置返回值类型', link: '/dev-example/result-built-in' },
           { text: '参数条件控制', link: '/dev-example/parameter-if' },
           { text: '参数循环', link: '/dev-example/parameter-for' },
           { text: 'Ngbatis内置函数与变量', link: '/dev-example/built-in-function' },
