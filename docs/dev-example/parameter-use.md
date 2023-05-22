@@ -113,7 +113,7 @@
         LIMIT 1
     </select>
     ```
-    ```xml [参数由 DB 替换，方式1]
+    ```xml [参数由 DB 替换]
     <select id="selectByName">
         MATCH (n: person)
         WHERE n.person.name == $p0
@@ -130,7 +130,9 @@
         Person selectByName( Person person );
     ```
 - PersonDao.xml
-    ```xml
+    ::: code-group
+
+    ```xml [参数由 NgBatis 替换，方式1]
     <select id="selectByName">
         MATCH (n: person)
         WHERE n.person.name == '${ name }'
@@ -138,6 +140,23 @@
         LIMIT 1
     </select>
     ```
+    ```xml [方式2]
+    <select id="selectByName">
+        MATCH (n: person)
+        WHERE n.person.name == ${ ng.valueFmt(name) }
+        RETURN n
+        LIMIT 1
+    </select>
+    ```
+    ```xml [参数由 DB 替换]
+    <select id="selectByName">
+        MATCH (n: person)
+        WHERE n.person.name == $name
+        RETURN n
+        LIMIT 1
+    </select>
+    ```
+    :::
 
 ##### 参数有两个及以上时：
 - PersonDao.java
@@ -146,7 +165,9 @@
         Person selectByName( Person person, Map<String, Object> params );
     ```
 - PersonDao.xml
-    ```xml
+    ::: code-group
+
+    ```xml [参数由 NgBatis 替换，方式1]
         <select id="selectByName">
             MATCH (n: person)
             WHERE n.person.name == '${ p0.name }'
@@ -155,6 +176,25 @@
             LIMIT 1
         </select>
     ```
+    ```xml [方式2]
+        <select id="selectByName">
+            MATCH (n: person)
+            WHERE n.person.name == ${ ng.valueFmt(p0.name) }
+            AND n.person.age > ${ ng.valueFmt(p1.age) }
+            RETURN n
+            LIMIT 1
+        </select>
+    ```
+    ```xml [参数由 DB 替换]
+        <select id="selectByName">
+            MATCH (n: person)
+            WHERE n.person.name == $p0.name
+            AND n.person.age > $p1.age
+            RETURN n
+            LIMIT 1
+        </select>
+    ```
+    :::
 
 ## 集合类型的参数获取，与基本类型一致。
 - 匿名时，使用 ${ p0 }、${ p1 }，或 $p0、$p1...
