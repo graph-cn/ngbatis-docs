@@ -6,7 +6,7 @@
     <dependency>
         <groupId>org.nebula-contrib</groupId>
         <artifactId>ngbatis</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.3</version>
     </dependency>
 ```
 
@@ -42,10 +42,6 @@ nebula:
   ngbatis:
     # ^v1.1.2
     # 连接使用 nebula-java 中的 SessionPool 
-    # 虽然是 1.1.2 的特性，
-    # 但该版本仅能使用 xml 中或者实体类注解的`@Space` 中对应的 space。
-    # 仅声明在 yml 中，并且开启此选项时，会出现 SessionPool null 的问题，
-    # 可升级至 1.2.0-SNAPSHOT 版本。
     use-session-pool: true 
   # 填入 graphd 的 ip 和端口号，下面仅供参考
   hosts: 127.0.0.1:9669, ip:port, ....

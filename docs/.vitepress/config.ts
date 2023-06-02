@@ -4,7 +4,7 @@ import { withMermaid } from "vitepress-plugin-mermaid";
 // https://vitepress.dev/reference/site-config
 export default withMermaid({
   base: "/ngbatis-docs/",
-  title: "Ngbatis Docs",
+  title: "NgBatis Docs",
   description: "Development documentation for ngbatis",
   themeConfig: {
     search: {
@@ -23,7 +23,7 @@ export default withMermaid({
       {
         text: "快速开始",
         items: [
-          { text: "关于Ngbatis", link: "/quick-start/about" },
+          { text: "关于NgBatis", link: "/quick-start/about" },
           { text: "框架特性", link: "/quick-start/features" },
           { text: "引入项目与配置", link: "/quick-start/install" },
         ],
@@ -65,13 +65,13 @@ export default withMermaid({
     "/": {
       lang: "zh-CN",
       label: "简体中文",
-      title: "Ngbatis",
+      title: "NgBatis",
       description: "一个NebulaGraph的ORM框架",
     },
     "/en/": {
       lang: "en-US",
       label: "English",
-      title: "Ngbatis",
+      title: "NgBatis",
       description: "An ORM framework for NebulaGraph",
     },
   },
