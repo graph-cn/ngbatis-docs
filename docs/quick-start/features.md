@@ -2,7 +2,7 @@
 
 ## 一、集成
 
-- [x] 支持通过简单配置，快速完成 NebulaGraph 与 Spring Boot 的整合
+- 支持通过简单配置，快速完成 NebulaGraph 与 Spring Boot 的整合
 
 ## 二、单表（Vertex、Edge）操作，无需写  `nGQL | Cypher`
 
@@ -40,27 +40,27 @@ startNode(Class<E\> startType, Class edgeType, ID endId) | 查找查找一个节
 
 ### (一) 参数替换
 
-- [x] 使用占位符为 `nGQL | Cypher` 替换参数，并执行到数据库
+- 使用占位符为 `nGQL | Cypher` 替换参数，并执行到数据库
   - 编写查询脚本模板，搭配参数控制，实现动态查询
   - 通过参数循环，实现批量操作
 
-### (二) 通过 Dao 接口的方法签名信息，对 ResultSet 进行处理，形成业务所需类型
+### (二) 通过 DAO 接口的方法签名信息，对 ResultSet 进行处理，形成业务所需类型
 
-  - [x] 集合类型
+  - 集合类型
       - Collection<基本类型>
       - Collection<对象类型> `Object 类型参考下述 Object 的支持`
-  - [x] 基本类型
+  - 基本类型
     - String
     - Boolean
     - Number（Integer、Long、Float、Double、Byte、Short），**暂时只支持 Java 包装类**
-  - [x] 对象类型
+  - 对象类型
     -  Object
       - 多列 return 值转换成 Map
       - 多列 return 值转换成 POJO
       - 支持 Vertex 类型转换成 POJO
       - 支持 Edge 类型转换成 POJO
-  - [x] ResultSet 如不需要使用框架自带的结果处理，可直接在接口声明返回值 ResultSet 并自行处理
+  - ResultSet 如不需要使用框架自带的结果处理，可直接在接口声明返回值 ResultSet 并自行处理
 
 ## 四、主键生成策略接口
 
-- [x] 提供主键生成器的埋点，开发者可自定义主键生成器
+- 提供主键生成器的埋点，开发者可自定义主键生成器
