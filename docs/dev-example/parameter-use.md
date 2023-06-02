@@ -1,6 +1,6 @@
 # 如何传入参数
 
-通过【[自定义nGQL](./custom-crud)】我们已经知道了如何使自己编写的 `nGQL | cypher` 如何通过 Java 调用并执行到 NebulaGraph 中。
+通过【[自定义 nGQL](./custom-crud)】我们已经知道了如何使自己编写的 `nGQL | Cypher` 如何通过 Java 调用并执行到 NebulaGraph 中。
 
 接下来，将在当前部分介绍如何对自己编写的语句进行传参。
 
@@ -33,7 +33,7 @@
         LIMIT 1
     </select>
     ```
-    ```xml [方式2]
+    ```xml [方式 2]
     <select id="selectByName">
         MATCH (n: person)
         WHERE n.person.name == ${ ng.valueFmt(name) } // 可以忽略类型差异
@@ -70,7 +70,7 @@
         LIMIT 1
     </select>
     ```
-    ```xml [方式2]
+    ```xml [方式 2]
     <select id="selectByName">
         MATCH (n: person)
         WHERE n.person.name == ${ ng.valueFmt(person.name) }
@@ -258,6 +258,6 @@
 - 特殊符号问题：
     - 可以使用内置函数进行转义 `${ ng.valueFmt( 参数名 ) }`，该函数同样无需判断数据类型。如是字符串也无需加前后引号
 
-
 ## 总结
+
 到此，关于参数获取的大致介绍完毕。如果有关于获取参数后的条件控制以及遍历的需求，请移步【[参数条件控制](./parameter-if)】、【[参数遍历](./parameter-for)】。

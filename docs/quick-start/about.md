@@ -14,8 +14,8 @@
 
 - 数据库：[NebulaGraph](https://github.com/vesoft-inc/nebula)
 - 动态代理生成框架：[ASM](https://gitlab.ow2.org/asm/asm/) `v8.0`
-- mapper文件解析：[Jsoup](https://github.com/jhy/jsoup) `v1.12.1`
-- nGQL模板：[Beetl](https://github.com/javamonkey/beetl2.0) `v3.1.8.RELEASE`
+- mapper 文件解析：[Jsoup](https://github.com/jhy/jsoup) `v1.12.1`
+- nGQL 模板：[Beetl](https://github.com/javamonkey/beetl2.0) `v3.1.8.RELEASE`
 
 ## 环境要求
 

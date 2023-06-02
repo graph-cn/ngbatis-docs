@@ -34,7 +34,7 @@ public interface PersonDao {
 
 - ng_cm ClassModel DAO 接口的类模型，便于在 XML 中拿到更多类信息 (1.1.0-rc)
 - ng_mm MethodModel DAO 接口中某个方法的模型，便于在 XML 中拿到方法信息，包括入参类型 (1.1.0-rc)
-- ng_args 传入 DAO 接口的原始参数，未序列化前。(1.1.0-rc)
+- ng_args 传入 DAO 接口的原始参数，未序列化前 (1.1.0-rc)
 
 ## 内置函数
 
