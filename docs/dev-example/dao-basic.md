@@ -29,12 +29,12 @@ public class PersonServiceImpl {
 
   @Autowired private PersonDao dao;
 
-  // 不管属性是否为空，如果数据库中已有对应 ID 的值，则覆盖
+  // 全属性写入，如果对应的 id 已存在，放弃写入
   public void insert( Person person ) {
     dao.insert( person );
   }
 
-  // 仅写入非空属性
+  // 仅写入非空属性，如果对应的 id 已存在，放弃写入
   public void insertSelective( Person preson ) {
     dao.insertSelective( person );
   }

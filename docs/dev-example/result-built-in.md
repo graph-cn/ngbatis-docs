@@ -63,3 +63,38 @@
     ]
 }
 ```
+
+## NgPath
+
+```json
+{
+    "relationships": [{
+        "srcID": "IB1666614724207",
+        "dstID": "1661449493728",
+        "dst": {
+            "properties": {
+                "person": {}
+            },
+            "tags": ["person"],
+            "vid": "1661449493728"
+        },
+        "edgeName": "like",
+        "rank": 0,
+    }],
+}
+```
+
+
+## NgTriplet 
+
+主要用于`insertEdgeBatch`接口批量写入边数据，暂不支持用做返回值类型。
+
+```json
+{
+    "srcId": "IB1666614724207",
+    "dstId": "1661449493728",
+    "startNode": {}, // 起始节点实体类对象
+    "edge": {},  // 边实体对象
+    "endNode": {}, // 终止节点实体类对象
+}
+```

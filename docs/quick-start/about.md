@@ -13,11 +13,22 @@
 ## 关键环节的相关技术
 
 - 数据库：[NebulaGraph](https://github.com/vesoft-inc/nebula)
-- 动态代理生成框架：[ASM](https://gitlab.ow2.org/asm/asm/) `v8.0`
-- mapper 文件解析：[Jsoup](https://github.com/jhy/jsoup) `v1.12.1`
-- nGQL 模板：[Beetl](https://github.com/javamonkey/beetl2.0) `v3.1.8.RELEASE`
+- 动态代理生成框架：[ASM](https://gitlab.ow2.org/asm/asm/) `v9.4`
+- mapper 文件解析：[Jsoup](https://github.com/jhy/jsoup) `v1.15.4`
+- nGQL 模板：[Beetl](https://github.com/javamonkey/beetl2.0) `v3.15.10.RELEASE`
 
 ## 环境要求
 
 - Java 8+
 - Spring Boot
+
+
+## 作者
+
+<p align="left">
+    <a href="https://github.com/nebula-contrib/ngbatis/graphs/contributors">
+        <img width="770" src="https://contrib.rocks/image?repo=nebula-contrib/ngbatis&max=300&columns=16" />
+    </a>
+</p>
+
+> 同样感谢每一位因为提交代码所用邮箱跟GitHub账号所用邮箱不一致而未被记录的贡献者。

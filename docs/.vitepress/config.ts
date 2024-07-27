@@ -42,7 +42,14 @@ export default withMermaid({
               { text: "准备工作", link: "/dev-example/prepare" },
               { text: "使用基类读写", link: "/dev-example/dao-basic" },
               { text: "基类实现多标签", link: "/dev-example/multi-tag" },
-              { text: "自定义nGQL", link: "/dev-example/custom-crud" },
+              { 
+                text: "自定义nGQL", 
+                link: "/dev-example/custom-crud",
+                items: [
+                  { text: "引用nGQL片段", link: "/dev-example/referencing-fragment" },
+                  { text: "多个图空间", link: "/dev-example/multi-space" },
+                ],
+              },
               { text: "如何传入参数", link: "/dev-example/parameter-use" },
               { text: "不同返回值类型", link: "/dev-example/result" },
               { text: "内置返回值类型", link: "/dev-example/result-built-in" },
@@ -92,6 +99,15 @@ export default withMermaid({
               { text: "Using Base Class for Read and Write", link: "/en/dev-example/dao-basic" },
               { text: "Base Class Implementation for Multiple Tags", link: "/en/dev-example/multi-tag" },
               { text: "Custom nGQL", link: "/en/dev-example/custom-crud" },
+              
+              { 
+                text: "Custom nGQL", 
+                link: "/dev-example/custom-crud",
+                items: [
+                  { text: "Referencing an nGQL Fragment", link: "/en/dev-example/referencing-fragment" },
+                  { text: "Multi Space", link: "/dev-example/multi-space" },
+                ],
+              },
               { text: "How to Pass Parameters", link: "/en/dev-example/parameter-use" },
               { text: "Different Return Value Types", link: "/en/dev-example/result" },
               { text: "Built-in Return Value Types", link: "/en/dev-example/result-built-in" },

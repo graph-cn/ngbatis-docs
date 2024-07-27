@@ -9,6 +9,7 @@ public interface PersonDao {
   void insertPerson( Person person );
 }
 ```
+
 ```xml
 <mapper namespace="your.domain.PersonDao">
 
@@ -27,104 +28,132 @@ public interface PersonDao {
 </mapper>
 ```
 
-> Here we use built-in functions such as `ng.kv`, `ng.id`, `ng.tagName`, `ng.join`, `ng.schemaFmt`, and built-in parameters such as `ng_args`.
-
+> In this example, built-in functions such as `ng.kv`, `ng.id`, `ng.tagName`, `ng.join`, `ng.schemaFmt`, and the built-in parameter `ng_args` are used.
 > After understanding the usage, we will further introduce the functions in the following content.
 
-## Built-in variables
+## Built-in Variables
 
-- ng_cm: ClassModel, the class model of the DAO interface, which makes it easier to get more class information in XML (1.1.0-rc)
+- ng_cm ClassModel Dao interface class model, making it easier to get more class information in the xml (1.1.0-rc)
+- ng_mm MethodModel Dao interface method model, making it easier to get method information in the xml, including input parameter types. (1.1.0-rc)
+- ng_args The original parameters passed to the Dao interface, before serialization. (1.1.0-rc)
 
-- ng_mm: MethodModel, the model of a method in the DAO interface, which makes it easier to get method information in XML, including the type of the incoming parameter (1.1.0-rc)
-- ng_args: The original parameters passed into the DAO interface, before serialization (1.1.0-rc)
+## Built-in Functions
 
-## Built-in functions
+- ng.valueFmt
 
-- ng.valueFmt: Formats the value of an indefinite type of data, ignoring whether to append single quotes and date formatting, and directly passes the original Java type
+> Format data values of uncertain types, ignoring whether to append single quotes and date formatting, and directly pass the original java type
 
-  参数位 | 参数说明 | 类型  | 是否必传 | 默认值
+  Parameter Position | Parameter Description | Type  | Required | Default Value
   ---|---|---|---|---
-  1 | 值 | Object | Y | 
-  2 | 如果是字符串是否在前后追加 .* 形成模糊查询 | Boolean | N | false
+  1 | Value | Object | Y |
+  2 | If it is a string, whether to append .* before and after to form a fuzzy query | boolean | N | false
 
-  > 自 v1.1.2 起，默认对字符串类型进行转义，可使用：`ValueFmtFn.setEscape( false )` 进行关闭
+> Starting from v1.1.2, string types are escaped by default, which can be turned off using: `ValueFmtFn.setEscape( false )`
 
-- ng.schemaFmt，对模式名前后追加 **`**，以避免与数据库关键字冲突
+- ng.schemaFmt
 
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
+> Add **`** before and after the schema name to avoid conflicts with database keywords
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
   ---|---|---|---|---
-  1 | 模式名，如 tagName, edgeName, propertyName | Object | Y
+  1 | Schema name, such as tagName, edgeName, propertyName | Object | Y
 
-- ng.tagName，用于从实体类或 DAO 接口获取 tag name
+- ng.kv
 
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
+> Get multiple collections through the entity object
+>
+> - columns Column name collection
+> - valueNames Attribute name collection
+> - values Value collection
+> - types Attribute types
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
   ---|---|---|---|---
-  1 | 与 Schema 对应的实体类对象 | Object | Y 
-  2 | 类模型，使用 `ng_cm` 传入 | ClassModel | N | null
-
-- ng.pkField，用于获取主键属性，java.lang.reflect.Field
-
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
-  ---|---|---|---|---
-  1 | 实体类类型 | Class<?> | Y 
-  2 | 如果不存在主键是否报错中断 | Boolean | N | false
-
-- ng.pkName，用于获取主键名，String
-
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
-  ---|---|---|---|---
-  1 | 实体类对象 | Object | Y 
-  2 | true 时使用列名，false 时使用属性名 | Boolean | N | true
-
-- ng.entityType，用于获取实体类类型
-
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
-  ---|---|---|---|---
-  1 | 实体类对象 | Object | Y 
-
-- ng.fieldNames，获取属性名集合（不包括主键）
-
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
-  ---|---|---|---|---
-  1 | 实体类对象 | Object | Y 
-  2 | true 时使用列名，false 时使用属性名 | Boolean | N | true
+  1 | Entity class object | Object | Y
+  2 | Parameter name prefix | String | N | null
+  3 | Exclude primary key | Boolean | N | true
+  4 | Exclude null values | Boolean | N | true
+  5 | If there is no primary key, whether to report an error and interrupt | Boolean | N | true
   
-- ng.id，获取 ID 值
+- ng.join
 
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
+> Format the collection
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
   ---|---|---|---|---
-  1 | 实体类对象 | Object | Y 
-  2 | 如果不存在主键是否报错中断 | Boolean | N | true
-  3 | 如果值为空，true 会通过主键生成器返回新值，false 时返回空 | Boolean | N | true
+  1 | Collection to be formatted | Iterable | Y
+  2 | Separator between elements | String | N | `,`
+  3 | Function name, before each element is concatenated, it can be formatted by the specified formatting function and then concatenated | String | N | null
+
+- ng.tagName
+
+> Used to get the tag name from the entity class or Dao interface
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
+  ---|---|---|---|---
+  1 | Entity class object corresponding to the Schema | Object | Y
+  2 | Class model, pass in using `ng_cm` | ClassModel | N | null
+
+- ng.pkField
+
+> Used to get the primary key attribute, java.lang.reflect.Field
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
+  ---|---|---|---|---
+  1 | Entity class type | Class<?> | Y
+  2 | If there is no primary key, whether to report an error and interrupt | Boolean | N | false
+
+- ng.pkName
+
+> Used to get the primary key name, String
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
+  ---|---|---|---|---
+  1 | Entity class object | Object | Y
+  2 | Use column name when true, use attribute name when false | Boolean | N | true
+
+- ng.entityType
+
+> Used to get the entity class type
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
+  ---|---|---|---|---
+  1 | Entity class object | Object | Y
+
+- ng.fieldNames
+
+> Get the attribute name collection (excluding primary key)
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
+  ---|---|---|---|---
+  1 | Entity class object | Object | Y
+  2 | Use column name when true, use attribute name when false | Boolean | N | true
   
-- ng.kv，通过实体对象或者获取多个集合
-  - columns 列名集合
-  - valueNames 属性名集合
-  - values 值集合
-  - types 属性类型
+- ng.id
 
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
+> Get the id value
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
   ---|---|---|---|---
-  1 | 实体类对象 | Object | Y 
-  2 | 参数名前缀 | String | N | null
-  3 | 是否排除主键 | Boolean | N | true
-  4 | 是否排除空值 | Boolean | N | true
-  5 | 如无主键，是否报错中断 | Boolean | N | true
+  1 | Entity class object | Object | Y
+  2 | If there is no primary key, whether to report an error and interrupt | Boolean | N | true
+  3 | If the value is empty, return a new value generated by the primary key generator when true, return null when false | Boolean | N | true
   
-- ng.join，对集合进行格式化
+- ng.ifStringLike
 
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
+> When the type is a string, prepend and append `.*`
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
   ---|---|---|---|---
-  1 | 待格式化的集合 | Iterable | Y 
-  2 | 元素间的分隔符 | String | N | `,` 
-  3 | 函数名，各元素拼接前，可进行函数名指定的格式化函数先行格式化，再拼接 | String | N | null
+  1 | Value | Object | Y
+  2 | Attribute type | Object | N | null
+  3 | Attribute name, used to not write the value in plain text in ngql, but use the parameter name to let nebula take the value from the parameters | String | N | null
 
-- ng.ifStringLike，类型为字符串时，前后拼接 `.*`
+- ng.include
 
-  参数位 | 参数说明 | 类型 | 必传 | 默认值
+> Reference nGQL snippet
+
+  Parameter Position | Parameter Description | Type | Required | Default Value
   ---|---|---|---|---
-  1 | 值 | Object | Y 
-  2 | 属性类型 | Object | N | null
-  3 | 属性名，用于不将值明文写在 nGQL 中，而使用参数名，让 NebulaGraph 在参数中取值 | String | N | null
-
-
+  1 | The nGQL snippet ID to be referenced.<br/>To reference nGQL snippets from other mappers, add the namespace of the snippet before the snippet ID, e.g., your.domain.TestDao.nGQL-ID | String  | Y
+  2 | Additional parameters when referencing nGQL snippets, which will be used preferentially when generating statements | Object | N | null

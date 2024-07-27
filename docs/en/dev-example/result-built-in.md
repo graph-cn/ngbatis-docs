@@ -64,3 +64,39 @@ You can consider using the built-in return value type if there is no entity in t
     ]
 }
 ```
+
+## NgPath
+
+```json
+{
+    "relationships": [{
+        "srcID": "IB1666614724207",
+        "dstID": "1661449493728",
+        "dst": {
+            "properties": {
+                "person": {}
+            },
+            "tags": ["person"],
+            "vid": "1661449493728"
+        },
+        "edgeName": "like",
+        "rank": 0,
+    }],
+}
+```
+
+
+## NgTriplet 
+
+Used mainly for the `insertEdgeBatch` interface to batch write edge data, and is not currently supported as a return value type.
+
+
+```json
+{
+    "srcId": "IB1666614724207",
+    "dstId": "1661449493728",
+    "startNode": {},
+    "edge": {},
+    "endNode": {},
+}
+```

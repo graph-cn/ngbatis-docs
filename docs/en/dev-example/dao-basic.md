@@ -1,6 +1,7 @@
 # By Basic DAO
 
 ## Create a Dao corresponding to `Person` and extends NebulaDaoBasic
+
 ```java
 package your.domain;
 
@@ -12,6 +13,7 @@ public interface PersonDao extends NebulaDaoBasic<Person, String> {
 ```
 
 ## Create a file named `PersonDao.xml`. The default location is `/resources/mapper`
+
 ```xml
 <mapper namespace="your.domain.PersonDao">
 
@@ -19,6 +21,7 @@ public interface PersonDao extends NebulaDaoBasic<Person, String> {
 ```
 
 ## Examples in the service layer
+
 ```java
 
 @Service
@@ -28,12 +31,14 @@ public class PersonServiceImpl {
 
   // Regardless of whether the attribute is empty or not, 
   // if there is a corresponding ID value in the database, 
-  // other properties will be overwritten
+  //   no changes will be made
   public void insert( Person person ) {
     dao.insert( person );
   }
 
   // Write only non empty properties
+  // if there is a corresponding ID value in the database, 
+  //   no changes will be made
   public void insertSelective( Person preson ) {
     dao.insertSelective( person );
   }
