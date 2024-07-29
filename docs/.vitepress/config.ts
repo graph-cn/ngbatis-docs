@@ -1,4 +1,3 @@
-import { defineConfig, withBase } from "vitepress";
 import { withMermaid } from "vitepress-plugin-mermaid";
 
 // https://vitepress.dev/reference/site-config
@@ -102,10 +101,10 @@ export default withMermaid({
               
               { 
                 text: "Custom nGQL", 
-                link: "/dev-example/custom-crud",
+                link: "/en/dev-example/custom-crud",
                 items: [
                   { text: "Referencing an nGQL Fragment", link: "/en/dev-example/referencing-fragment" },
-                  { text: "Multi Space", link: "/dev-example/multi-space" },
+                  { text: "Multi Space", link: "/en/dev-example/multi-space" },
                 ],
               },
               { text: "How to Pass Parameters", link: "/en/dev-example/parameter-use" },
