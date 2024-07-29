@@ -10,7 +10,7 @@ export default withMermaid({
       provider: "local",
     },
     socialLinks: [
-      { icon: "github", link: "https://github.com/nebula-contrib/ngbatis" },
+      { icon: "github", link: "https://github.com/graph-cn/ngbatis-docs" },
     ],
 
     langMenuLabel: "Languages",
